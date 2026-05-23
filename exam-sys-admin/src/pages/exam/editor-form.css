@@ -1,0 +1,63 @@
+.exam-editor-page {
+    overflow-x: hidden;
+}
+
+.exam-editor-form {
+    width: 100%;
+}
+
+.app-container .exam-editor-form.ant-form {
+    display: block;
+    margin-bottom: 0;
+}
+
+.exam-editor-form.ant-form-vertical,
+.exam-editor-form .ant-form-item,
+.exam-editor-form .ant-form-item .ant-row,
+.exam-editor-form .ant-form-item-control,
+.exam-editor-form .ant-form-item-control-input,
+.exam-editor-form .ant-form-item-control-input-content {
+    width: 100%;
+}
+
+.exam-editor-form .ant-form-item {
+    display: block;
+}
+
+.exam-editor-form .ant-select,
+.exam-editor-form .ant-input-number,
+.exam-editor-form .ant-picker,
+.exam-editor-form .ql-container,
+.exam-editor-form .ql-toolbar {
+    width: 100%;
+}
+
+.exam-editor-form .ql-toolbar.ql-snow,
+.exam-editor-form .ql-container.ql-snow {
+    box-sizing: border-box;
+}
+
+.exam-editor-form__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.exam-editor-form__inline-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.exam-editor-form__inline-row .ant-input {
+    flex: 1;
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    .exam-editor-form__inline-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}

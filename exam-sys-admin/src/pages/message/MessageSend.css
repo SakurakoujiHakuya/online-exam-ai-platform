@@ -1,0 +1,12 @@
+.app-container {
+    background: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px 0 rgba(16, 24, 40, 0.08);
+    padding: 32px 24px 24px 24px;
+    min-height: 80vh;
+}
+
+.app-container .ant-form-item-label > label {
+    font-weight: 500;
+    color: #334155;
+}

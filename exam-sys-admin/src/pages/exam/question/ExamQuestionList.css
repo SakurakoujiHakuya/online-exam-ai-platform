@@ -1,0 +1,33 @@
+.question-list-page {
+    overflow: hidden;
+}
+
+.question-list-search {
+    row-gap: 16px;
+}
+
+.question-list-table .ant-table {
+    min-width: 0;
+}
+
+.question-list-table .ant-table-thead > tr > th,
+.question-list-table .ant-table-tbody > tr > td {
+    white-space: nowrap;
+    word-break: keep-all;
+}
+
+.question-list-table .ant-table-tbody > tr > td {
+    vertical-align: middle;
+}
+
+.question-list-table .ant-table-cell {
+    overflow-wrap: normal;
+}
+
+.question-list-table .ant-tag {
+    margin-inline-end: 0;
+}
+
+.question-list-table .ant-tag + .ant-tag {
+    margin-left: 6px;
+}

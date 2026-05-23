@@ -1,0 +1,38 @@
+.do-exam-container {
+    background: #f0f2f5;
+    min-height: 100vh;
+}
+
+.fixed-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 100;
+    padding: 10px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.exam-content {
+    background: transparent;
+}
+
+.question-item {
+    margin-bottom: 30px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 20px;
+}
+
+.question-item:last-child {
+    border-bottom: none;
+}
+
+.q-title {
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+.q-content {
+    padding-left: 10px;
+}

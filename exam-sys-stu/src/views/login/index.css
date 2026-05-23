@@ -1,0 +1,40 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+    background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg'); /* Ant Design Pro bg style */
+    background-repeat: no-repeat;
+    background-position: center 110px;
+    background-size: 100%;
+}
+
+.login-card {
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.logo-circle {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin: 0 auto 16px;
+}
+
+.login-header h2 {
+    margin: 0;
+    color: rgba(0,0,0,0.85);
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.login-form-forgot {
+    float: right;
+}

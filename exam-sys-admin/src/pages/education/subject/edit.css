@@ -1,0 +1,82 @@
+.app-container {
+    background: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px 0 rgba(16, 24, 40, 0.08);
+    padding: 32px 24px 24px 24px;
+    min-height: 80vh;
+}
+
+.app-container .ant-form-item-label > label {
+    font-weight: 500;
+    color: #334155;
+}
+
+.subject-edit-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.subject-edit-section {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.subject-edit-section__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.subject-edit-section__header h2,
+.subject-edit-draft-block__title h3 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.subject-edit-section__header p,
+.subject-edit-draft-block__title p {
+    margin: 8px 0 0;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.subject-edit-form {
+    max-width: 640px;
+}
+
+.subject-edit-form__actions .ant-form-item-control-input-content {
+    display: flex;
+    gap: 8px;
+}
+
+.subject-edit-draft-block {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.subject-edit-draft-block__title {
+    margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+    .subject-edit-section {
+        padding: 20px 16px;
+    }
+
+    .subject-edit-section__header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .subject-edit-form__actions .ant-form-item-control-input-content {
+        flex-direction: column;
+    }
+}

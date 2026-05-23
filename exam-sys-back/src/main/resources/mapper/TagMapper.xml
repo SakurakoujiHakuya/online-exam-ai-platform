@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mindskip.xzs.repository.TagMapper">
+  <resultMap id="BaseResultMap" type="com.mindskip.xzs.domain.Tag">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="score_rate" jdbcType="DOUBLE" property="scoreRate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, create_user, create_time, deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_tag
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_tag
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mindskip.xzs.domain.Tag" useGeneratedKeys="true" keyProperty="id">
+    insert into t_tag (id, name, create_user, create_time, deleted)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mindskip.xzs.domain.Tag" useGeneratedKeys="true" keyProperty="id">
+    insert into t_tag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mindskip.xzs.domain.Tag">
+    update t_tag
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mindskip.xzs.domain.Tag">
+    update t_tag
+    set name = #{name,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="page" resultMap="BaseResultMap" parameterType="com.mindskip.xzs.viewmodel.admin.education.TagPageRequestVM">
+    select
+    <include refid="Base_Column_List" />,
+    (
+      select round(
+        ifnull(
+          sum(coalesce(epqca.customer_score, 0)) * 100 / nullif(sum(coalesce(epqca.question_score, 0)), 0),
+          0
+        ),
+        1
+      )
+      from t_question_tag qt
+      inner join t_question q on q.id = qt.question_id and q.deleted = 0
+      inner join t_exam_paper_question_customer_answer epqca on epqca.question_id = q.id
+      where qt.tag_id = t_tag.id
+    ) as score_rate
+    from t_tag
+    <where>
+      and deleted = 0
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="name != null and name != ''">
+        and name like concat('%', #{name}, '%')
+      </if>
+    </where>
+  </select>
+
+  <select id="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_tag
+    <where>
+      and deleted = 0
+      <if test="keyword != null and keyword != ''">
+        and name like concat('%', #{keyword}, '%')
+      </if>
+    </where>
+    order by name asc, id asc
+  </select>
+
+  <select id="countByName" resultType="java.lang.Integer">
+    select count(1)
+    from t_tag
+    where deleted = 0
+      and name = #{name}
+      <if test="excludeId != null">
+        and id != #{excludeId}
+      </if>
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_tag
+    where deleted = 0 and name = #{name}
+    limit 1
+  </select>
+
+  <select id="selectAnyByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_tag
+    where name = #{name}
+    limit 1
+  </select>
+
+  <select id="selectIdByName" resultType="java.lang.Integer">
+    select id
+    from t_tag
+    where deleted = 0
+      and name = #{name}
+    limit 1
+  </select>
+
+  <select id="countReferences" resultType="java.lang.Integer">
+    select
+      (
+        select count(1)
+        from t_question_tag qt
+        inner join t_question q on q.id = qt.question_id and q.deleted = 0
+        where qt.tag_id = #{tagId}
+      )
+      + (
+        select count(1)
+        from t_exam_paper_tag ept
+        inner join t_exam_paper ep on ep.id = ept.exam_paper_id and ep.deleted = 0
+        where ept.tag_id = #{tagId}
+      )
+  </select>
+
+  <select id="selectByIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_tag
+    where id in
+    <foreach item="id" collection="ids" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+
+  <select id="listQuestionTagsForStudent" resultMap="BaseResultMap">
+    select distinct
+    t.id, t.name, t.create_user, t.create_time, t.deleted
+    from t_tag t
+    inner join t_question_tag qt on qt.tag_id = t.id
+    inner join t_question q on q.id = qt.question_id and q.deleted = 0
+    <where>
+      and t.deleted = 0
+      and q.user_group_id = #{userGroupId}
+      <if test="subjectId != null">
+        and q.subject_id = #{subjectId}
+      </if>
+      <if test="excludeTagName != null and excludeTagName != ''">
+        and not exists (
+          select 1
+          from t_question_tag hidden_qt
+          inner join t_tag hidden_t on hidden_t.id = hidden_qt.tag_id and hidden_t.deleted = 0
+          where hidden_qt.question_id = q.id
+            and hidden_t.name = #{excludeTagName}
+        )
+      </if>
+      <if test="keyword != null and keyword != ''">
+        and t.name like concat('%', #{keyword}, '%')
+      </if>
+    </where>
+    order by t.name asc, t.id asc
+  </select>
+</mapper>

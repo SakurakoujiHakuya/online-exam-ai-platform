@@ -1,0 +1,19 @@
+.dashboard-container {
+    padding: 10px;
+}
+
+.section {
+    margin-bottom: 24px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 400;
+    color: #1f2f3d;
+    border-left: 10px solid;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}

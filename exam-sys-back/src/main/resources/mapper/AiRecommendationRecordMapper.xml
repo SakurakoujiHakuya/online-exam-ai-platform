@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mindskip.xzs.repository.AiRecommendationRecordMapper">
+  <resultMap id="BaseResultMap" type="com.mindskip.xzs.domain.AiRecommendationRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="recommendation_type" jdbcType="VARCHAR" property="recommendationType" />
+    <result column="target_id" jdbcType="INTEGER" property="targetId" />
+    <result column="reason" jdbcType="LONGVARCHAR" property="reason" />
+    <result column="accepted" jdbcType="BIT" property="accepted" />
+    <result column="effect_score" jdbcType="INTEGER" property="effectScore" />
+    <result column="payload" jdbcType="LONGVARCHAR" property="payload" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, student_id, recommendation_type, target_id, reason, accepted, effect_score, payload, create_time, modify_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from t_ai_recommendation_record where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_ai_recommendation_record where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.mindskip.xzs.domain.AiRecommendationRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into t_ai_recommendation_record (
+      id, student_id, recommendation_type, target_id, reason, accepted, effect_score, payload, create_time, modify_time
+    ) values (
+      #{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{recommendationType,jdbcType=VARCHAR}, #{targetId,jdbcType=INTEGER},
+      #{reason,jdbcType=LONGVARCHAR}, #{accepted,jdbcType=BIT}, #{effectScore,jdbcType=INTEGER}, #{payload,jdbcType=LONGVARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.mindskip.xzs.domain.AiRecommendationRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into t_ai_recommendation_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="studentId != null">student_id,</if>
+      <if test="recommendationType != null">recommendation_type,</if>
+      <if test="targetId != null">target_id,</if>
+      <if test="reason != null">reason,</if>
+      <if test="accepted != null">accepted,</if>
+      <if test="effectScore != null">effect_score,</if>
+      <if test="payload != null">payload,</if>
+      <if test="createTime != null">create_time,</if>
+      <if test="modifyTime != null">modify_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=INTEGER},</if>
+      <if test="studentId != null">#{studentId,jdbcType=INTEGER},</if>
+      <if test="recommendationType != null">#{recommendationType,jdbcType=VARCHAR},</if>
+      <if test="targetId != null">#{targetId,jdbcType=INTEGER},</if>
+      <if test="reason != null">#{reason,jdbcType=LONGVARCHAR},</if>
+      <if test="accepted != null">#{accepted,jdbcType=BIT},</if>
+      <if test="effectScore != null">#{effectScore,jdbcType=INTEGER},</if>
+      <if test="payload != null">#{payload,jdbcType=LONGVARCHAR},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="modifyTime != null">#{modifyTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.mindskip.xzs.domain.AiRecommendationRecord">
+    update t_ai_recommendation_record
+    <set>
+      <if test="studentId != null">student_id = #{studentId,jdbcType=INTEGER},</if>
+      <if test="recommendationType != null">recommendation_type = #{recommendationType,jdbcType=VARCHAR},</if>
+      <if test="targetId != null">target_id = #{targetId,jdbcType=INTEGER},</if>
+      <if test="reason != null">reason = #{reason,jdbcType=LONGVARCHAR},</if>
+      <if test="accepted != null">accepted = #{accepted,jdbcType=BIT},</if>
+      <if test="effectScore != null">effect_score = #{effectScore,jdbcType=INTEGER},</if>
+      <if test="payload != null">payload = #{payload,jdbcType=LONGVARCHAR},</if>
+      <if test="createTime != null">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="modifyTime != null">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.mindskip.xzs.domain.AiRecommendationRecord">
+    update t_ai_recommendation_record set
+      student_id = #{studentId,jdbcType=INTEGER},
+      recommendation_type = #{recommendationType,jdbcType=VARCHAR},
+      target_id = #{targetId,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=LONGVARCHAR},
+      accepted = #{accepted,jdbcType=BIT},
+      effect_score = #{effectScore,jdbcType=INTEGER},
+      payload = #{payload,jdbcType=LONGVARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByStudentId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from t_ai_recommendation_record where student_id = #{studentId} order by create_time desc
+  </select>
+
+  <select id="countAll" resultType="java.lang.Integer">
+    select count(*) from t_ai_recommendation_record
+  </select>
+
+  <select id="countAccepted" resultType="java.lang.Integer">
+    select count(*) from t_ai_recommendation_record where accepted = 1
+  </select>
+
+  <select id="countUseful" resultType="java.lang.Integer">
+    select count(*) from t_ai_recommendation_record where effect_score = 3
+  </select>
+</mapper>

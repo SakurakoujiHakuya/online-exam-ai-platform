@@ -1,0 +1,39 @@
+.app-container {
+    background: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px 0 rgba(16, 24, 40, 0.08);
+    padding: 32px 24px 24px 24px;
+    min-height: 80vh;
+}
+
+.app-container .ant-card {
+    border-radius: 12px;
+    box-shadow: 0 1px 4px 0 rgba(16, 24, 40, 0.06);
+}
+
+.app-container .ant-card-head {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.app-container .ant-card-head-title {
+    font-weight: 600;
+    color: #334155;
+}
+
+.app-container .ant-tabs-nav {
+    margin-bottom: 24px;
+}
+
+.app-container .ant-tabs-tab {
+    font-weight: 500;
+    color: #64748b;
+}
+
+.app-container .ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+.app-container .ant-tabs-ink-bar {
+    background-color: #4f46e5;
+}

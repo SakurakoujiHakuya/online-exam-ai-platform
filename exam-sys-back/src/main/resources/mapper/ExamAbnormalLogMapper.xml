@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mindskip.xzs.repository.ExamAbnormalLogMapper">
+  <resultMap id="BaseResultMap" type="com.mindskip.xzs.domain.ExamAbnormalLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="exam_paper_id" jdbcType="INTEGER" property="examPaperId" />
+    <result column="exam_paper_name" jdbcType="VARCHAR" property="examPaperName" />
+    <result column="abnormal_type" jdbcType="INTEGER" property="abnormalType" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, user_id, user_name, real_name, exam_paper_id, exam_paper_name, abnormal_type, content, create_time
+  </sql>
+
+  <insert id="insert" parameterType="com.mindskip.xzs.domain.ExamAbnormalLog" useGeneratedKeys="true" keyProperty="id">
+    insert into t_exam_abnormal_log (user_id, user_name, real_name, exam_paper_id, exam_paper_name, abnormal_type, content, create_time)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{examPaperId,jdbcType=INTEGER}, #{examPaperName,jdbcType=VARCHAR}, #{abnormalType,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <select id="page" resultMap="BaseResultMap" parameterType="com.mindskip.xzs.viewmodel.admin.user.UserEventPageRequestVM">
+    select
+    <include refid="Base_Column_List"/>
+    from t_exam_abnormal_log
+    <where>
+      <if test="userName != null and userName != ''">
+        and user_name like concat('%', #{userName}, '%')
+      </if>
+    </where>
+    order by id desc
+  </select>
+</mapper>

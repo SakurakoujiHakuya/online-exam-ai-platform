@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mindskip.xzs.repository.QuestionRevisionLogMapper">
+  <resultMap id="BaseResultMap" type="com.mindskip.xzs.domain.QuestionRevisionLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="source_type" jdbcType="INTEGER" property="sourceType" />
+    <result column="revision_type" jdbcType="VARCHAR" property="revisionType" />
+    <result column="before_snapshot" jdbcType="LONGVARCHAR" property="beforeSnapshot" />
+    <result column="after_snapshot" jdbcType="LONGVARCHAR" property="afterSnapshot" />
+    <result column="reviewer_id" jdbcType="INTEGER" property="reviewerId" />
+    <result column="reference_id" jdbcType="INTEGER" property="referenceId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, question_id, source_type, revision_type, before_snapshot, after_snapshot, reviewer_id, reference_id, create_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from t_question_revision_log where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_question_revision_log where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.mindskip.xzs.domain.QuestionRevisionLog" useGeneratedKeys="true" keyProperty="id">
+    insert into t_question_revision_log (
+      id, question_id, source_type, revision_type, before_snapshot, after_snapshot, reviewer_id, reference_id, create_time
+    ) values (
+      #{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{sourceType,jdbcType=INTEGER}, #{revisionType,jdbcType=VARCHAR},
+      #{beforeSnapshot,jdbcType=LONGVARCHAR}, #{afterSnapshot,jdbcType=LONGVARCHAR}, #{reviewerId,jdbcType=INTEGER},
+      #{referenceId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.mindskip.xzs.domain.QuestionRevisionLog" useGeneratedKeys="true" keyProperty="id">
+    insert into t_question_revision_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="questionId != null">question_id,</if>
+      <if test="sourceType != null">source_type,</if>
+      <if test="revisionType != null">revision_type,</if>
+      <if test="beforeSnapshot != null">before_snapshot,</if>
+      <if test="afterSnapshot != null">after_snapshot,</if>
+      <if test="reviewerId != null">reviewer_id,</if>
+      <if test="referenceId != null">reference_id,</if>
+      <if test="createTime != null">create_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=INTEGER},</if>
+      <if test="questionId != null">#{questionId,jdbcType=INTEGER},</if>
+      <if test="sourceType != null">#{sourceType,jdbcType=INTEGER},</if>
+      <if test="revisionType != null">#{revisionType,jdbcType=VARCHAR},</if>
+      <if test="beforeSnapshot != null">#{beforeSnapshot,jdbcType=LONGVARCHAR},</if>
+      <if test="afterSnapshot != null">#{afterSnapshot,jdbcType=LONGVARCHAR},</if>
+      <if test="reviewerId != null">#{reviewerId,jdbcType=INTEGER},</if>
+      <if test="referenceId != null">#{referenceId,jdbcType=INTEGER},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.mindskip.xzs.domain.QuestionRevisionLog">
+    update t_question_revision_log
+    <set>
+      <if test="questionId != null">question_id = #{questionId,jdbcType=INTEGER},</if>
+      <if test="sourceType != null">source_type = #{sourceType,jdbcType=INTEGER},</if>
+      <if test="revisionType != null">revision_type = #{revisionType,jdbcType=VARCHAR},</if>
+      <if test="beforeSnapshot != null">before_snapshot = #{beforeSnapshot,jdbcType=LONGVARCHAR},</if>
+      <if test="afterSnapshot != null">after_snapshot = #{afterSnapshot,jdbcType=LONGVARCHAR},</if>
+      <if test="reviewerId != null">reviewer_id = #{reviewerId,jdbcType=INTEGER},</if>
+      <if test="referenceId != null">reference_id = #{referenceId,jdbcType=INTEGER},</if>
+      <if test="createTime != null">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.mindskip.xzs.domain.QuestionRevisionLog">
+    update t_question_revision_log set
+      question_id = #{questionId,jdbcType=INTEGER},
+      source_type = #{sourceType,jdbcType=INTEGER},
+      revision_type = #{revisionType,jdbcType=VARCHAR},
+      before_snapshot = #{beforeSnapshot,jdbcType=LONGVARCHAR},
+      after_snapshot = #{afterSnapshot,jdbcType=LONGVARCHAR},
+      reviewer_id = #{reviewerId,jdbcType=INTEGER},
+      reference_id = #{referenceId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByQuestionId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from t_question_revision_log where question_id = #{questionId} order by create_time desc
+  </select>
+
+  <select id="countAll" resultType="java.lang.Integer">
+    select count(*) from t_question_revision_log
+  </select>
+
+  <select id="countByRevisionType" resultType="java.lang.Integer">
+    select count(*) from t_question_revision_log where revision_type = #{revisionType}
+  </select>
+</mapper>

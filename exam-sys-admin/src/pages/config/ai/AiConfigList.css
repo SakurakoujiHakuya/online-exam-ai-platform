@@ -1,0 +1,35 @@
+.ai-config-list__name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.ai-config-list__name-text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ai-config-list__table .ant-table {
+    table-layout: fixed;
+}
+
+.ai-config-list__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+}
+
+.ai-config-list__actions .ant-btn-link {
+    padding-inline: 0;
+    height: auto;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.ai-config-list__table .ant-table-pagination {
+    margin-inline: 0;
+}

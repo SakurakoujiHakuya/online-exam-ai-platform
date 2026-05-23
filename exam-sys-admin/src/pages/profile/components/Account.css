@@ -1,0 +1,18 @@
+.account-form {
+    max-width: 600px;
+}
+
+.account-form .ant-form-item-label > label {
+    font-weight: 500;
+    color: #334155;
+}
+
+.account-form .ant-input {
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.account-form .ant-input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}

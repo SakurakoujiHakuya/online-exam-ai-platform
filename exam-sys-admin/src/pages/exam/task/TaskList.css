@@ -1,0 +1,42 @@
+.task-list-container {
+    padding: 24px;
+    background: #f8fafc;
+    box-shadow: 0 1px 4px 0 rgba(16, 24, 40, 0.06);
+    font-size: 15px;
+}
+
+.task-list-container .query-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.task-list-container .left-side {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0;
+}
+
+.task-list-container .right-side {
+    display: flex;
+    align-items: center;
+}
+
+.task-list-container .ant-table-thead>tr>th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.task-list-container .ant-table-tbody>tr:hover>td {
+    background: #e0e7ff;
+}
+
+.task-list-container .ant-tag {
+    border-radius: 6px;
+    font-size: 13px;
+    padding: 0 10px;
+}

@@ -1,0 +1,41 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f2f5;
+    background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVirpZOSqZUIEALqjWnh.svg');
+    background-repeat: no-repeat;
+    background-position: center 110px;
+    background-size: 100%;
+}
+
+.register-card {
+    width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.logo-circle {
+    width: 64px;
+    height: 64px;
+    background: #1890ff;
+    border-radius: 50%;
+}
+
+.register-header h2 {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 600;
+    font-size: 24px;
+}

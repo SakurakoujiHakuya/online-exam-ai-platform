@@ -1,0 +1,8 @@
+target/
+tmp/
+log/
+.mvn/wrapper/maven-wrapper.jar
+.git/
+.gitignore
+README.md
+docs/

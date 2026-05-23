@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mindskip.xzs.repository.QuestionFeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.mindskip.xzs.domain.QuestionFeedback">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="feedback_type" jdbcType="VARCHAR" property="feedbackType" />
+    <result column="feedback_content" jdbcType="LONGVARCHAR" property="feedbackContent" />
+    <result column="ai_category" jdbcType="VARCHAR" property="aiCategory" />
+    <result column="ai_summary" jdbcType="LONGVARCHAR" property="aiSummary" />
+    <result column="ai_suggestion" jdbcType="LONGVARCHAR" property="aiSuggestion" />
+    <result column="analysis_source" jdbcType="VARCHAR" property="analysisSource" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <result column="review_comment" jdbcType="LONGVARCHAR" property="reviewComment" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="review_time" jdbcType="TIMESTAMP" property="reviewTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, question_id, student_id, feedback_type, feedback_content, ai_category, ai_summary,
+    ai_suggestion, analysis_source, status, teacher_id, review_comment, create_time, review_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from t_question_feedback where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_question_feedback where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.mindskip.xzs.domain.QuestionFeedback" useGeneratedKeys="true" keyProperty="id">
+    insert into t_question_feedback (
+      id, question_id, student_id, feedback_type, feedback_content, ai_category, ai_summary,
+      ai_suggestion, analysis_source, status, teacher_id, review_comment, create_time, review_time
+    ) values (
+      #{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER},
+      #{feedbackType,jdbcType=VARCHAR}, #{feedbackContent,jdbcType=LONGVARCHAR}, #{aiCategory,jdbcType=VARCHAR},
+      #{aiSummary,jdbcType=LONGVARCHAR}, #{aiSuggestion,jdbcType=LONGVARCHAR}, #{analysisSource,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{teacherId,jdbcType=INTEGER}, #{reviewComment,jdbcType=LONGVARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{reviewTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.mindskip.xzs.domain.QuestionFeedback" useGeneratedKeys="true" keyProperty="id">
+    insert into t_question_feedback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="questionId != null">question_id,</if>
+      <if test="studentId != null">student_id,</if>
+      <if test="feedbackType != null">feedback_type,</if>
+      <if test="feedbackContent != null">feedback_content,</if>
+      <if test="aiCategory != null">ai_category,</if>
+      <if test="aiSummary != null">ai_summary,</if>
+      <if test="aiSuggestion != null">ai_suggestion,</if>
+      <if test="analysisSource != null">analysis_source,</if>
+      <if test="status != null">status,</if>
+      <if test="teacherId != null">teacher_id,</if>
+      <if test="reviewComment != null">review_comment,</if>
+      <if test="createTime != null">create_time,</if>
+      <if test="reviewTime != null">review_time,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=INTEGER},</if>
+      <if test="questionId != null">#{questionId,jdbcType=INTEGER},</if>
+      <if test="studentId != null">#{studentId,jdbcType=INTEGER},</if>
+      <if test="feedbackType != null">#{feedbackType,jdbcType=VARCHAR},</if>
+      <if test="feedbackContent != null">#{feedbackContent,jdbcType=LONGVARCHAR},</if>
+      <if test="aiCategory != null">#{aiCategory,jdbcType=VARCHAR},</if>
+      <if test="aiSummary != null">#{aiSummary,jdbcType=LONGVARCHAR},</if>
+      <if test="aiSuggestion != null">#{aiSuggestion,jdbcType=LONGVARCHAR},</if>
+      <if test="analysisSource != null">#{analysisSource,jdbcType=VARCHAR},</if>
+      <if test="status != null">#{status,jdbcType=INTEGER},</if>
+      <if test="teacherId != null">#{teacherId,jdbcType=INTEGER},</if>
+      <if test="reviewComment != null">#{reviewComment,jdbcType=LONGVARCHAR},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="reviewTime != null">#{reviewTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.mindskip.xzs.domain.QuestionFeedback">
+    update t_question_feedback
+    <set>
+      <if test="questionId != null">question_id = #{questionId,jdbcType=INTEGER},</if>
+      <if test="studentId != null">student_id = #{studentId,jdbcType=INTEGER},</if>
+      <if test="feedbackType != null">feedback_type = #{feedbackType,jdbcType=VARCHAR},</if>
+      <if test="feedbackContent != null">feedback_content = #{feedbackContent,jdbcType=LONGVARCHAR},</if>
+      <if test="aiCategory != null">ai_category = #{aiCategory,jdbcType=VARCHAR},</if>
+      <if test="aiSummary != null">ai_summary = #{aiSummary,jdbcType=LONGVARCHAR},</if>
+      <if test="aiSuggestion != null">ai_suggestion = #{aiSuggestion,jdbcType=LONGVARCHAR},</if>
+      <if test="analysisSource != null">analysis_source = #{analysisSource,jdbcType=VARCHAR},</if>
+      <if test="status != null">status = #{status,jdbcType=INTEGER},</if>
+      <if test="teacherId != null">teacher_id = #{teacherId,jdbcType=INTEGER},</if>
+      <if test="reviewComment != null">review_comment = #{reviewComment,jdbcType=LONGVARCHAR},</if>
+      <if test="createTime != null">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="reviewTime != null">review_time = #{reviewTime,jdbcType=TIMESTAMP},</if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.mindskip.xzs.domain.QuestionFeedback">
+    update t_question_feedback set
+      question_id = #{questionId,jdbcType=INTEGER},
+      student_id = #{studentId,jdbcType=INTEGER},
+      feedback_type = #{feedbackType,jdbcType=VARCHAR},
+      feedback_content = #{feedbackContent,jdbcType=LONGVARCHAR},
+      ai_category = #{aiCategory,jdbcType=VARCHAR},
+      ai_summary = #{aiSummary,jdbcType=LONGVARCHAR},
+      ai_suggestion = #{aiSuggestion,jdbcType=LONGVARCHAR},
+      analysis_source = #{analysisSource,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
+      review_comment = #{reviewComment,jdbcType=LONGVARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="pageForAdmin" resultMap="BaseResultMap" parameterType="com.mindskip.xzs.viewmodel.collaboration.FeedbackReviewPageRequestVM">
+    select <include refid="Base_Column_List" /> from t_question_feedback
+    <where>
+      <if test="status != null">and status = #{status}</if>
+      <if test="feedbackType != null and feedbackType != ''">and feedback_type = #{feedbackType}</if>
+      <if test="subjectId != null">and question_id in (select id from t_question where subject_id = #{subjectId})</if>
+    </where>
+    order by status asc, create_time desc
+  </select>
+
+  <select id="selectByStudentId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from t_question_feedback where student_id = #{studentId} order by create_time desc
+  </select>
+
+  <select id="selectByQuestionId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from t_question_feedback where question_id = #{questionId} order by create_time desc
+  </select>
+
+  <select id="selectByQuestionIds" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from t_question_feedback
+    where question_id in
+    <foreach item="questionId" collection="questionIds" open="(" separator="," close=")">
+      #{questionId}
+    </foreach>
+    order by create_time desc
+  </select>
+
+  <select id="countAll" resultType="java.lang.Integer">
+    select count(*) from t_question_feedback
+  </select>
+
+  <select id="countByStatus" resultType="java.lang.Integer">
+    select count(*) from t_question_feedback where status = #{status}
+  </select>
+</mapper>

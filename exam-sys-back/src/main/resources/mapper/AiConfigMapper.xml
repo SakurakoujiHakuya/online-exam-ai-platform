@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mindskip.xzs.repository.AiConfigMapper">
+  <resultMap id="BaseResultMap" type="com.mindskip.xzs.domain.AiConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="provider" jdbcType="VARCHAR" property="provider" />
+    <result column="api_key" jdbcType="VARCHAR" property="apiKey" />
+    <result column="base_url" jdbcType="VARCHAR" property="baseUrl" />
+    <result column="model_name" jdbcType="VARCHAR" property="modelName" />
+    <result column="config_json" jdbcType="LONGVARCHAR" property="configJson" />
+    <result column="is_active" jdbcType="INTEGER" property="isActive" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, `name`, provider, api_key, base_url, model_name, config_json, is_active, create_time, modify_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `t_ai_config`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="allList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `t_ai_config`
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `t_ai_config`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.mindskip.xzs.domain.AiConfig" useGeneratedKeys="true" keyProperty="id">
+    insert into `t_ai_config` (`name`, provider, api_key, 
+      base_url, model_name, config_json, is_active,
+      create_time, modify_time)
+    values (#{name,jdbcType=VARCHAR}, #{provider,jdbcType=VARCHAR}, #{apiKey,jdbcType=VARCHAR}, 
+      #{baseUrl,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, #{configJson,jdbcType=LONGVARCHAR}, #{isActive,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.mindskip.xzs.domain.AiConfig" useGeneratedKeys="true" keyProperty="id">
+    insert into `t_ai_config`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="provider != null">
+        provider,
+      </if>
+      <if test="apiKey != null">
+        api_key,
+      </if>
+      <if test="baseUrl != null">
+        base_url,
+      </if>
+      <if test="modelName != null">
+        model_name,
+      </if>
+      <if test="configJson != null">
+        config_json,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null">
+        #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="apiKey != null">
+        #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="baseUrl != null">
+        #{baseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null">
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="configJson != null">
+        #{configJson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.mindskip.xzs.domain.AiConfig">
+    update `t_ai_config`
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null">
+        provider = #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="apiKey != null">
+        api_key = #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="baseUrl != null">
+        base_url = #{baseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null">
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="configJson != null">
+        config_json = #{configJson,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.mindskip.xzs.domain.AiConfig">
+    update `t_ai_config`
+    set `name` = #{name,jdbcType=VARCHAR},
+      provider = #{provider,jdbcType=VARCHAR},
+      api_key = #{apiKey,jdbcType=VARCHAR},
+      base_url = #{baseUrl,jdbcType=VARCHAR},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      config_json = #{configJson,jdbcType=LONGVARCHAR},
+      is_active = #{isActive,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="resetAllActive">
+    update `t_ai_config` set is_active = 0
+  </update>
+
+  <update id="setActive" parameterType="java.lang.Integer">
+    update `t_ai_config` set is_active = 1 where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectActive" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `t_ai_config`
+    where is_active = 1
+    limit 1
+  </select>
+</mapper>

@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: exam-mysql
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: xzs
+      TZ: Asia/Shanghai
+
+    command: --default-time-zone=+08:00
+      --innodb-buffer-pool-size=128M
+      --max-connections=50
+      --performance-schema=OFF
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./exam-sys-back/backup/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+
+  backend:
+    build:
+      context: ./exam-sys-back
+      dockerfile: Dockerfile
+
+    container_name: exam-backend
+    restart: always
+
+    ports:
+      - "8000:8080"
+
+    environment:
+      MYSQLHOST: mysql
+      MYSQLPORT: 3306
+      MYSQLUSER: root
+      MYSQLPASSWORD: 123456
+      MYSQLDATABASE: xzs
+      TZ: Asia/Shanghai
+      JAVA_TOOL_OPTIONS: "-Duser.timezone=Asia/Shanghai -Xms256m -Xmx512m"
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql-data:
