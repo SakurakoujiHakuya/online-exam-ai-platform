@@ -9,7 +9,7 @@
 | 入口 | 地址 | 演示账号 |
 | --- | --- | --- |
 | 学生端 | [https://exam-stu.hakuya.top](https://exam-stu.hakuya.top) | `student` / `123456` |
-| 管理端 | [https://exam-admin.hakuya.top](https://exam-admin.hakuya.top) | `admin` / `114514` |
+| 管理端 | [https://exam-admin.hakuya.top](https://exam-admin.hakuya.top) | `test` / `123456` |
 
 公开演示环境中的数据会随着测试操作变化；如果用于正式部署，请及时更换默认账号、数据库密码、上传配置和 AI API Key。
 
