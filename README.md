@@ -265,4 +265,22 @@ QINIU_SECRET_KEY=
 
 ## 许可证
 
-项目按 MIT 许可证发布。
+本项目基于 AGPL-3.0 许可证发布。
+
+本项目在开发过程中参考并基于以下开源项目进行了扩展与修改：
+
+### xzs-mysql
+
+* Repository: https://github.com/mindskip/xzs-mysql
+* Original Author: mindskip
+* Original License: AGPL-3.0
+
+在原项目基础上，本项目进行了功能扩展与重构，包括但不限于：
+
+* AI 辅助出题与试卷生成
+* 教师-学生协同纠错流程
+* React 前端重构
+* JWT 权限认证改造
+* 学情分析与练习系统扩展
+
+感谢原作者的开源贡献。
